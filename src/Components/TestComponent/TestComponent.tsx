@@ -13,7 +13,8 @@ const TestComponent = () => {
 				This is using the es6 method map()
 				<br />I am mapping numberArray1: {numberArray1.toString()} into
 				numberArray2: {numberArray2.toString()}, which is a copy of
-				numberArray1 where every value is doubled
+				numberArray1 where every value is doubled. This is not possible
+				in old school IE JS (es5?).
 			</h4>
 		</div>
 	);
