@@ -9,7 +9,12 @@ const TestComponent = () => {
 	return (
 		<div>
 			<h1>Test Component</h1>
-			<h4>{numberArray2.toString()}</h4>
+			<h4>
+				This is using the es6 method map()
+				<br />I am mapping numberArray1: {numberArray1.toString()} into
+				numberArray2: {numberArray2.toString()}, which is a copy of
+				numberArray1 where every value is doubled
+			</h4>
 		</div>
 	);
 };
