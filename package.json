@@ -1,0 +1,52 @@
+{
+	"name": "React Project Boilerplate",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"eslint-fix": "eslint --fix --ext .js,.jsx,.ts,.tsx",
+		"webpack": "webpack",
+		"start-dev": "webpack serve --mode development",
+		"start-prod": "webpack serve --mode production",
+		"build-dev": "webpack --mode development",
+		"build-prod": "webpack --mode production",
+		"format": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\""
+	},
+	"keywords": [],
+	"author": "Derek DenHartigh <derekd@behler-young.com> (http://behler-young.com/)",
+	"license": "BY",
+	"devDependencies": {
+		"@babel/core": "7.14.3",
+		"@babel/node": "7.14.2",
+		"@babel/preset-env": "7.14.2",
+		"@babel/preset-react": "7.13.13",
+		"@babel/preset-typescript": "7.13.0",
+		"@types/react": "17.0.6",
+		"@types/react-dom": "17.0.5",
+		"babel-eslint": "^10.1.0",
+		"babel-loader": "8.2.2",
+		"css-loader": "5.2.4",
+		"eslint": "^7.26.0",
+		"eslint-config-react": "^1.1.7",
+		"eslint-loader": "^4.0.2",
+		"eslint-plugin-react": "^7.23.2",
+		"eslint-webpack-plugin": "^2.5.4",
+		"html-webpack-plugin": "5.3.1",
+		"image-webpack-loader": "7.0.1",
+		"node-sass": "6.0.0",
+		"path": "0.12.7",
+		"prettier": "2.3.0",
+		"sass-loader": "11.1.1",
+		"style-loader": "2.0.0",
+		"ts-loader": "9.2.0",
+		"webpack": "5.37.0",
+		"webpack-cli": "4.7.0",
+		"webpack-dev-server": "3.11.2"
+	},
+	"dependencies": {
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"typescript": "4.2.4"
+	}
+}

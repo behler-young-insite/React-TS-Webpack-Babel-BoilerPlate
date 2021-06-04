@@ -1,0 +1,104 @@
+How to start this from scratch?
+	pull from the repo
+	npm i (install dependencies)
+	check out package.json.scripts for serving/building
+
+Creation Commands (https://dev.to/deadwing7x/setup-a-react-app-with-webpack-and-babel-4o3k)
+	from Project Root
+	npm init -y
+	-created src dir, index.html, index.js
+	npm install webpack webpack-cli webpack-dev-server --save-dev
+		webpack-cli helps us to use webpack on command line
+		webpack-dev-server is used to live reload the webpage so that we can view our changes without refreshing the page manually.
+	-created webpack.config.js (blank)
+	npm install path html-webpack-plugin --save-dev
+	npm install react react-dom --save
+	npm install --save-dev @babel/core @babel/node @babel/preset-env @babel/preset-react babel-loader
+		Babel will tell Webpack how to compile our React code.
+			a. @babel /core: used to compile ES6 and above to ES5.
+			b. @babel /preset-env: determines which transformations or plugins to use and polyfills (i.e it provides modern functionality on older browsers that do not natively support it) based on the browser matrix you want to support.
+			c. @babel /preset-react: compiles the React code into ES5 code.
+			d. babel-loader: a Webpack helper that transforms your JavaScript dependencies with Babel (i.e. will transform the import statements into require ones)
+	 npm install style-loader css-loader sass-loader node-sass image-webpack-loader --save-dev 
+		for using scss/styling
+			a. style-loader: will add styles to the DOM (injects a style tag inside the HTML file).
+			b. css-loader: lets us import CSS files in our project.
+			c. sass-loader: lets us import SCSS files in our project.
+			d. node-sass: compiles SCSS files into normal CSS files.
+			e. image-webpack-loader: lets us load images in our project.
+	-create babel config (.babelrc)
+	npm install file-loader @babel/plugin-proposal-class-properties --save-dev
+	- alter webpack.config.js to include the babel-loader, style-loader, css-loader, file-loader rules in module
+	git init
+	- don't forget to add .gitignore for node_modules
+	git remote add origin https://github.com/behler-young-insite/action-manager.git
+	git branch -M main
+	git push -u origin main
+	Repo initialized, now to add Typescript?
+	npm install typescript (did I need to do that since I already have?)
+	npm install @types/react @types/react-dom --save-dev
+		@types/react: contains type definitions for React.
+		@types/react-dom: contains type definitions for React DOM.
+	npm install @babel/preset-typescript --save-dev
+		- lets babel know we're using typescript
+	npm install -D ts-loader
+		- typescript loader
+	modify .babelrc (added "@babel/preset-typescript" preset)
+	modify webpack.config.js .. took changes from 2nd article, added to config from first article
+	create tsconfig.json
+		typescript configuration
+			"target": "es5" => will compile es6 or above code to es5 so that it is compatible with browsers.
+			"include": [src]" => specifies that only the files in the src folder should be included.
+			"sourceMap": true => Generates corresponding ‘.map’ file so that it can be used in the production code for debugging.
+			"strict": true => enables a wide range of type checking behavior that results in stronger guarantees of program correctness.
+			"allowJs": true => allows JavaScript files to be imported inside your project, instead of just .ts and .tsx files.
+	rename js files to tsx files (typescript react)
+	errors in compilation.. suggests:
+		npm i --save-dev @types/react
+		npm i --save-dev @types/react-dom
+		but I already ran "nmp install @types/react @types/react-dom --save-dev" ? will try again
+			added 5 packages? no more errors on my index.tsx file ¯\_(ツ)_/¯
+	npm run start (wait.. I could have just said npm start right?)
+	"Hello World!"
+
+Post Setup Tweaking (https://dev.to/deadwing7x/setup-a-react-app-using-webpack-babel-and-typescript-5927)
+	changed my scripts to build/run dev/prod environments, also had to change webpack-dev-server to webpack serve
+	had to add target to webpack.config.js so that es5 was targeted
+	downgraded a querystring to 5.1.1 since the dependencies higher than that are ecma 6 (could have babelled it?)
+	working in IE now
+
+More post tweaking (prettier and TS-Lint) - https://www.freecodecamp.org/news/how-to-set-up-deploy-your-react-app-from-scratch-using-webpack-and-babel-a669891033d4/
+	npm install --save-dev --save-exact prettier (https://prettier.io/docs/en)
+	created .prettierrc
+	changed my vsCode Settings to format on save (file.preferences --> formatOnSave: true)
+	npm --save-dev install eslint eslint-loader babel-eslint eslint-config-react eslint-plugin-react
+		npm WARN deprecated eslint-loader@4.0.2: This loader has been deprecated. Please use eslint-webpack-plugin
+		npm WARN deprecated babel-eslint@10.1.0: babel-eslint is now @babel/eslint-parser. This package will no longer receive updates.
+		I think I'll take npm's advice and get those versions..
+		(https://www.npmjs.com/package/eslint-webpack-plugin)
+		npm install eslint --save-dev (install eslint 7+)
+		npm install eslint-webpack-plugin --save-dev
+		npm install eslint --save-dev (https://github.com/yannickcr/eslint-plugin-react) -already had
+		
+		
+		
+
+webpack.config.js
+	a. entry and output: tells our server what has to be compiled and from where. Also tells the server where the compiled version should be outputted.
+	b. mode: this is the mode of our output, which is set to ‘development’ for now. Should be changed to 'production' when the app is build for production.
+	c. resolve: used so that we can import anything from the src folder in relative paths rather than the absolute ones, same goes for node_modules as well.
+	d. devServer: this tells the webpack-dev-server what files are needed to be served. Everything from our src folder needs to be served (outputted) in the browser.
+	e. plugins: here we set what plugins we need in our app. As of this moment we only need the html-webpack-plugin which tells the server that the index.bundle.js should be injected (or added if you will) to our index.html file
+
+Commands (from package.json.scripts):
+	npm test (no tests set up yet..)
+	npm build-prod (compiled, will run in IE, ugly)
+	npm build-dev (compiles to dev, wont work in IE, easy to debug)
+	npm start-dev (kicks off server of development)
+	npm start-prod (kicks off live server of prodution)
+	npm run format (Prettier auto-format)
+	npm eslint-fix (lints/fixes)
+
+misc:
+	may want to look into devtool for debugging: e.g. devtool: 'inline-source-map', (https://webpack.js.org/configuration/devtool/)
+
